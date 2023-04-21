@@ -138,8 +138,40 @@ class LinkedList {
   /** insertAt(idx, val): add node w/val before idx. */
 
   insertAt(idx, val) {
+    const newNode = new Node(val);
+    let current = this.head;
+    let count = 0;
 
+    if (idx < 0 || idx > this.length) {
+      throw new Error('Idx not available');
+    }
+
+    if (this.length === 0) {
+      this.head = newNode;
+      this.tail = newNode;
+      this.length++;
+    } else if (idx === 0) {
+      newNode.next = this.head;
+      this.head = newNode;
+      this.length++;
+    } else if (idx === this.length) {
+      this.tail.next = newNode;
+      this.tail = newNode;
+      this.length++;
+    } else {
+      while (current) {
+        if (count + 1 === idx) {
+          newNode.next = current.next;
+          current.next = newNode;
+          this.length++;
+        }
+
+        count++;
+        current = current.next;
+      }
+    }
   }
+
 
   /** removeAt(idx): return & remove item at idx, */
 
