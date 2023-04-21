@@ -109,6 +109,7 @@ class LinkedList {
       }
 
       current = current.next;
+      count++;
     }
 
     throw new Error('Idx not available');
@@ -117,7 +118,21 @@ class LinkedList {
   /** setAt(idx, val): set val at idx to val */
 
   setAt(idx, val) {
+    let current = this.head;
+    let count = 0;
+    let found = false;
 
+    while (current) {
+      if (count === idx) {
+        current.val = val;
+        found = true;
+      }
+
+      current = current.next;
+      count++;
+    }
+
+    if (!found) throw new Error('Idx not available');
   }
 
   /** insertAt(idx, val): add node w/val before idx. */
