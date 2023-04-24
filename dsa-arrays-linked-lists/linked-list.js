@@ -176,12 +176,69 @@ class LinkedList {
   /** removeAt(idx): return & remove item at idx, */
 
   removeAt(idx) {
+    let current = this.head;
 
+    if (idx < 0 || idx >= this.length) {
+      throw new Error('invalid idx');
+    }
+
+    let count = 0;
+    let removeVal;
+
+    if (this.length === 1) {
+      removeVal = this.head.val;
+      this.head = null;
+      this.tail = null;
+      this.length--;
+      return removeVal;
+    } else if (idx === 0) {
+      removeVal = this.head.val;
+      this.head = this.head.next;
+      this.length--;
+      return removeVal;
+    } else {
+      while (current) {
+        if (count + 1 === idx) {
+          removeVal = current.next.val;
+          current.next = current.next.next;
+          this.length--;
+          return removeVal;
+        }
+
+        count++;
+        current = current.next;
+      }
+    }
   }
 
   /** average(): return an average of all values in the list */
 
   average() {
+    if (this.length === 0) {
+      return 0;
+    }
+
+    let current = this.head;
+    let sum = 0;
+
+    while (current) {
+      sum += current.val;
+      current = current.next;
+    }
+
+    return sum / this.length;
+  }
+
+  reverseInPlace() {
+    let current = this.head;
+    this.tail = this.head;
+
+    while (current) {
+      let prevCurr = current;
+      
+      current = current.next;
+
+    }
 
   }
 }
